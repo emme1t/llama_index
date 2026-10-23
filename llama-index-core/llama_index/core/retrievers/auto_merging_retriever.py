@@ -139,7 +139,8 @@ class AutoMergingRetriever(BaseRetriever):
             # if there's a node in the middle, add that to the queue
             if (
                 cur_node.next_node is not None
-                and cur_node.next_node == nodes[idx + 1].node.prev_node
+                and nodes[idx + 1].node.prev_node is not None
+                and cur_node.next_node.node_id == nodes[idx + 1].node.prev_node.node_id
             ):
                 is_changed = True
                 next_node = self._storage_context.docstore.get_document(
